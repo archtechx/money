@@ -498,9 +498,9 @@ $money->is($bar); // true
 
 ## Tips
 
-### 💡 Accepted currency formats
+### 💡 Accepted currency code formats
 
-Most methods which accept a currency accept it in any format:
+Most methods which accept a currency accept it in any of these formats:
 ```php
 currency(USD::class);
 currency(new USD);
@@ -510,6 +510,20 @@ money(1000, USD::class)->convertTo('CZK');
 money(1000, 'USD')->convertTo(new CZK);
 money(1000, new USD)->convertTo(CZK::class);
 ```
+
+### 💡 Dynamically add currencies
+
+Class currencies are elegant, but not necessary. If your currency specs come from the database, or some API, you can register them as arrays.
+
+```php
+// LoadCurrencies middleware
+
+currencies()->add(cache()->remember('currencies', 3600, function () {
+    return UserCurrencies::where('user_id', auth()->id())->get()->toArray();
+});
+```
+
+Where the DB call returns an array of array currencies following the [format mentioned above](#creating-a-currency).
 
 ## Development & contributing
 
