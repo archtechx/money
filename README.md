@@ -4,6 +4,7 @@ A simple package for working with money.
 
 Main features:
 - Simple API
+- Livewire integration
 - Custom currency support
 - Highly customizable currencies
 - Rounding logic for compliant accounting
