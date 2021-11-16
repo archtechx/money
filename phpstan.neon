@@ -1,0 +1,26 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+    paths:
+        - src
+
+    excludePaths:
+        - src/Wireable.php
+
+    level: 8
+
+    universalObjectCratesClasses:
+        - Illuminate\Routing\Route
+
+    ignoreErrors:
+        -
+            message: '#Livewire#'
+            paths:
+                - src/*
+        -
+            message: '#Unsafe usage of new static#'
+            paths:
+                - src/Currency.php
+
+    checkMissingIterableValueType: false

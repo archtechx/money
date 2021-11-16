@@ -1,0 +1,45 @@
+{
+    "name": "archtechx/money",
+    "description": "A lightweight package for handling money math in PHP.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Samuel Štancl",
+            "email": "samuel@archte.ch"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "ArchTech\\Money\\": "src/"
+        },
+        "files": [
+            "src/helpers.php",
+            "src/Wireable.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ArchTech\\Money\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^8.0",
+        "illuminate/support": "^8.24",
+        "archtechx/helpers": "^0.1.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.9",
+        "pestphp/pest": "^1.10",
+        "phpstan/phpstan": "^0.12.92",
+        "pestphp/pest-plugin-laravel": "^1.1",
+        "nunomaduro/larastan": "^0.7.10"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ArchTech\\Money\\MoneyServiceProvider"
+            ]
+        }
+    }
+}
