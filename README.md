@@ -18,16 +18,13 @@ Require the package via composer:
 ```sh
 composer require archtechx/money
 ```
-
-## Main concepts
+# Usage
 
 The package has two main classes:
 - `Money` which represents monetary values
 - `Currency` which is extended by the currencies that you're using
 
 This document uses the terms [decimal value](#decimal-value), [base value](#base-value), [default currency](#default-currency), [current currency](#current-currency), [rounding](#rounding), [math decimals](#math-decimals), [display decimals](#display-decimals), and a few others. Refer to the [Terminology](#terminology) section for definitions.
-
-# Usage
 
 ## Money
 
