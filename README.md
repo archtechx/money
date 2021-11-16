@@ -314,6 +314,20 @@ public function rate(): float
 }
 ```
 
+### Setting the default currency
+
+You can set the [default currency](#default-currency) using the `setDefault()` method:
+```php
+currencies()->setDefault('USD');
+```
+
+### Setting the current currency
+
+You can set the [current currency](#current-currency) using the `setCurrent()` method:
+```php
+currencies()->setCurrent('USD');
+```
+
 ### Persisting a selected currency across requests
 
 If your users can select the currency they want to see the app in, the package can automatically write the current currency to a persistent store of your choice, and read from that store on subsequent requests.
