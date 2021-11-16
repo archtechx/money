@@ -6,7 +6,7 @@ Main features:
 - Simple API
 - Livewire integration
 - Custom currency support
-- Highly customizable currencies
+- Highly customizable formatting
 - Rounding logic for compliant accounting
 
 This package is our implementation of the [Money pattern](https://martinfowler.com/eaaCatalog/money.html).
