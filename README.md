@@ -337,7 +337,7 @@ For example, say we want to use the `currency` session key to keep track of the 
 ```php
 currencies()
     ->storeCurrentUsing(fn (string $code) => session()->put('currency', $code))
-    ->resolveCurrentUsing(fn () => session()->get('currency));
+    ->resolveCurrentUsing(fn () => session()->get('currency'));
 ```
 You can add this code to your AppServiceProvider's `boot()` method.
 
