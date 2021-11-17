@@ -471,9 +471,9 @@ The component can look roughly like this:
     },
 
     init() {
-        $watch('money', () => $wire.set('money', {
-            value: Math.round(this.value / 100),
-            currency: this.currency.
+        $watch('money', money => $wire.set('money', {
+            value: Math.round(money.value / 100),
+            currency: money.currency.
         }))
     },
 }" x-init="init">
