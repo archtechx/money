@@ -52,9 +52,9 @@ $money = money(2000, new USD); // $20.00
 $money = money(3000, CZK::class); // 20 Kč
 
 // Using decimals
-$money = Money::fromDecimals(15.00, 'EUR'); // 15.00 €
-$money = Money::fromDecimals(20.00, new USD); // $20.00
-$money = Money::fromDecimals(30.00, CZK::class); // 20 Kč
+$money = Money::fromDecimal(15.00, 'EUR'); // 15.00 €
+$money = Money::fromDecimal(20.00, new USD); // $20.00
+$money = Money::fromDecimal(30.00, CZK::class); // 20 Kč
 ```
 
 ### Arithmetics
@@ -136,7 +136,7 @@ $money->value(); // 1200
 ### Accessing the decimal value
 
 ```php
-$money = Money::fromDecimals(100.0, new USD);
+$money = Money::fromDecimal(100.0, new USD);
 $money->value(); // 10000
 $money->decimals(); // 100.0
 ```
@@ -146,13 +146,13 @@ $money->decimals(); // 100.0
 You can format money using the `->formatted()` method:
 
 ```php
-$money = Money::fromDecimals(40.25, USD::class);
+$money = Money::fromDecimal(40.25, USD::class);
 $money->formatted(); // $40.25
 ```
 
 The method optionally accepts overrides for the [currency specification](#currency-logic):
 ```php
-$money = Money::fromDecimals(40.25, USD::class);
+$money = Money::fromDecimal(40.25, USD::class);
 
 // $ 40.25 USD
 $money->formatted(decimalSeparator: ',', prefix: '$ ', suffix: ' USD');
@@ -160,7 +160,7 @@ $money->formatted(decimalSeparator: ',', prefix: '$ ', suffix: ' USD');
 
 The overrides can also be passed as an array:
 ```php
-$money = Money::fromDecimals(40.25, USD::class);
+$money = Money::fromDecimal(40.25, USD::class);
 
 // $ 40.25 USD
 $money->formatted(['decimalSeparator' => ',', 'prefix' => '$ ', 'suffix' => ' USD']);
@@ -171,7 +171,7 @@ $money->formatted(['decimalSeparator' => ',', 'prefix' => '$ ', 'suffix' => ' US
 Some currencies, such as the Czech Crown (CZK), generally display final prices in full crowns, but use cents for the intermediate math operations. For example:
 
 ```php
-$money = Money::fromDecimals(3.30, CZK::class);
+$money = Money::fromDecimal(3.30, CZK::class);
 $money->value(); // 330
 $money->formatted(); // 3 Kč
 
@@ -188,12 +188,12 @@ This rounding (to full crowns) is standard and legal per the accounting legislat
 
 For that use case, our package lets you get the rounding difference using a simple method call:
 ```php
-$money = Money::fromDecimals(9.90, CZK::class);
+$money = Money::fromDecimal(9.90, CZK::class);
 $money->decimals(); // 9.90
 $money->formatted(); // 10 Kč
 $money->rounding(); // +0.10 Kč = 10
 
-$money = Money::fromDecimals(3.30, CZK::class);
+$money = Money::fromDecimal(3.30, CZK::class);
 $money->decimals(); // 3.30
 $money->formatted(); // 3 Kč
 $money->rounding(); // -0.30 Kč = -30
@@ -203,13 +203,13 @@ $money->rounding(); // -0.30 Kč = -30
 
 ```php
 // Using the currency rounding
-$money = Money::fromDecimals(9.90, CZK::class);
+$money = Money::fromDecimal(9.90, CZK::class);
 $money->decimals(); // 9.90
 $money = $money->rounded(); // currency rounding
 $money->decimals(); // 10.0
 
 // Using custom rounding
-$money = Money::fromDecimals(2.22, USD::class);
+$money = Money::fromDecimal(2.22, USD::class);
 $money->decimals(); // 2.22
 $money = $money->rounded(1); // custom rounding: 1 decimal
 $money->decimals(); // 2.20
@@ -378,7 +378,7 @@ The package uses the base value for all money calculations.
 
 The decimal value isn't used for calculations, but it is the human-readable one. It's typically used in the formatted value.
 ```php
-$money = Money::fromDecimals(100.0); // $100 USD
+$money = Money::fromDecimal(100.0); // $100 USD
 $money->value(); // 10000
 $money->decimal(); // 100.0
 ```
@@ -431,7 +431,7 @@ The current currency is something you can convert money to in the final step of 
 
 The default currency is the currency that Money defaults to in the context of your codebase.
 
-The `money()` helper, `Money::fromDecimals()` method, and `new Money()` all use this currency (unless a specific one is provided).
+The `money()` helper, `Money::fromDecimal()` method, and `new Money()` all use this currency (unless a specific one is provided).
 
 It can be a good idea to use the default currency for data storage. See more about this in the [Value in default currency](#value-in-default-currency) section.
 
@@ -439,7 +439,7 @@ It can be a good idea to use the default currency for data storage. See more abo
 
 The math decimals refer to the amount of decimal points the currency has in a math context.
 
-All math operations are still done in floats, using the [base value](#base-value), but the math decimals are used for knowing how to round the money after each operation, how to instantiate it with the `Money::fromDecimals()` method, and more.
+All math operations are still done in floats, using the [base value](#base-value), but the math decimals are used for knowing how to round the money after each operation, how to instantiate it with the `Money::fromDecimal()` method, and more.
 
 ### Display decimals
 
