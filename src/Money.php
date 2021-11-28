@@ -26,6 +26,12 @@ final class Money implements JsonSerializable, Arrayable, Wireable
         return new self($value, $this->currency);
     }
 
+    /** Create a new Money instance with the same currency from a decimal value. */
+    protected function newFromDecimal(float $decimal): self
+    {
+        return static::fromDecimal($decimal, $this->currency);
+    }
+
     /** Create a Money instance from a decimal value. */
     public static function fromDecimal(float $decimal, Currency|string $currency = null): self
     {
@@ -49,10 +55,26 @@ final class Money implements JsonSerializable, Arrayable, Wireable
         );
     }
 
+    /** Add money (in decimal value). */
+    public function addDecimal(float $decimal): self
+    {
+        return $this->addMoney(
+            $this->newFromDecimal($decimal)
+        );
+    }
+
     /** Subtract money (in base value). */
     public function subtract(int $value): self
     {
         return $this->new($this->value - $value);
+    }
+
+    /** Subtract money (in decimal value). */
+    public function subtractDecimal(float $decimal): self
+    {
+        return $this->subtractMoney(
+            $this->newFromDecimal($decimal)
+        );
     }
 
     /** Subtract money (of another Money instance). */
@@ -250,11 +272,10 @@ final class Money implements JsonSerializable, Arrayable, Wireable
     }
 
     /** Get the cents from the decimal value. */
-    public function cents(): static
+    public function cents(): self
     {
-        return static::fromDecimal(
-            $this->decimal() - floor($this->decimal()),
-            $this->currency,
+        return $this->newFromDecimal(
+            $this->decimal() - floor($this->decimal())
         );
     }
 

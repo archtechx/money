@@ -225,6 +225,16 @@ test('the cents from the decimal value can be fetched using the cents method', f
     expect(money(123456789, CZK::class)->cents()->value())->toBe(89);
 });
 
+test('decimal values can be added and subtracted', function () {
+    expect(
+        money(1234)->addDecimal(21.3)->value()
+    )->toBe(3364);
+
+    expect(
+        money(1234)->subtractDecimal(8.3)->value()
+    )->toBe(404);
+});
+
 test('money can be serialized to JSON', function () {
     currencies()->add(CZK::class);
 
