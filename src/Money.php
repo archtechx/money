@@ -249,6 +249,15 @@ final class Money implements JsonSerializable, Arrayable, Wireable
         return $this->rounded()->value() - $this->value();
     }
 
+    /** Get the cents from the decimal value. */
+    public function cents(): static
+    {
+        return static::fromDecimal(
+            $this->decimal() - floor($this->decimal()),
+            $this->currency,
+        );
+    }
+
     public function toLivewire()
     {
         return $this->toArray();

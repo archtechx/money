@@ -210,6 +210,21 @@ test('the is method compares both the value and the currency', function () {
     )->toBeFalse();
 });
 
+test('the cents from the decimal value can be fetched using the cents method', function () {
+    currencies()->add(CZK::class);
+
+    expect(money(100)->cents())->toBeInstanceOf(Money::class);
+
+    expect(money(1234, USD::class)->cents()->value())->toBe(34);
+    expect(money(1234, CZK::class)->cents()->value())->toBe(34);
+
+    expect(money(100, USD::class)->cents()->value())->toBe(0);
+    expect(money(100, CZK::class)->cents()->value())->toBe(0);
+
+    expect(money(123456789, USD::class)->cents()->value())->toBe(89);
+    expect(money(123456789, CZK::class)->cents()->value())->toBe(89);
+});
+
 test('money can be serialized to JSON', function () {
     currencies()->add(CZK::class);
 
