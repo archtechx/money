@@ -21,7 +21,7 @@ final class Money implements JsonSerializable, Arrayable, Wireable
     }
 
     /** Create a new Money instance with the same currency. */
-    protected function new(int $value): self
+    public function new(int $value): self
     {
         return new self($value, $this->currency);
     }
