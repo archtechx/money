@@ -27,7 +27,7 @@ class MoneyServiceProvider extends ServiceProvider
 
     }
 
-    public function boot()
+    public function boot(): void
     {
         $this->publishes([
             __DIR__ . '/../config/config.php' => config_path('money.php'),
