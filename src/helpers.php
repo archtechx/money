@@ -32,6 +32,6 @@ if (! function_exists('currencies')) {
     /** Get the CurrencyManager instance. */
     function currencies(): CurrencyManager
     {
-        return app(CurrencyManager::class);
+        return app(config('money.manager'));
     }
 }

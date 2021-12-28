@@ -525,6 +525,26 @@ currencies()->add(cache()->remember('currencies', 3600, function () {
 
 Where the DB call returns an array of array currencies following the [format mentioned above](#creating-a-currency).
 
+
+## Customization
+Optionally you could publish the config and replace the `CurrencyManager::class` with your own.
+
+```bash
+php artisan vendor:publish --tag="money-config"
+```
+
+```php
+// config/money.php
+<?php
+
+return [
+    //...
+    'manager' => \ArchTech\Money\CurrencyManager::class, // replace with your own
+];
+
+```
+
+
 ## Development & contributing
 
 Run all checks locally:
