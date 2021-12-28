@@ -115,7 +115,7 @@ final class Money implements JsonSerializable, Arrayable, Wireable
     public function addFee(float $rate): self
     {
         return $this->multiplyBy(
-            round(1 + $rate, $this->currency->mathDecimals())
+            round(1 + ($rate / 100), $this->currency->mathDecimals())
         );
     }
 
@@ -129,7 +129,7 @@ final class Money implements JsonSerializable, Arrayable, Wireable
     public function subtractFee(float $rate): self
     {
         return $this->divideBy(
-            round(1 + $rate, $this->currency->mathDecimals())
+            round(1 + ($rate / 100), $this->currency->mathDecimals())
         );
     }
 

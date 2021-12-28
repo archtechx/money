@@ -104,19 +104,19 @@ test('money can be divided', function () {
 test('fees can be added to and subtracted from money', function () {
     $money = Money::fromDecimal(10.0);
 
-    expect($money->addFee(0.1)->decimal())->toBe(11.0);
-    expect($money->subtractFee(0.1)->decimal())->toBe(9.09); // 10/1.1
+    expect($money->addFee(10)->decimal())->toBe(11.0);
+    expect($money->subtractFee(10)->decimal())->toBe(9.09); // 10/1.1
 });
 
 test('taxes can be added and subtracted from money', function () {
     currencies()->add([CZK::class]);
 
     expect(
-        Money::fromDecimal(100.0, 'CZK')->addTax(0.21)->decimal()
+        Money::fromDecimal(100.0, 'CZK')->addTax(21.0)->decimal()
     )->toBe(121.0);
 
     expect(
-        Money::fromDecimal(121.0, 'CZK')->subtractTax(0.21)->decimal()
+        Money::fromDecimal(121.0, 'CZK')->subtractTax(21.0)->decimal()
     )->toBe(100.0);
 });
 
