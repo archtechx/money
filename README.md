@@ -88,6 +88,12 @@ $money = money(2200);
 $money->convertTo(CZK::class);
 ```
 
+### Converting money and change rate
+Sometimes you want to change the rate on the fly, just add the new rate as a second argument when converting.
+```php
+$money->convertTo(CZK::class, 1.0); // changes the CZK::class rate to 1.0
+```
+
 ### Comparing money instances
 
 **Equality of monetary value**
