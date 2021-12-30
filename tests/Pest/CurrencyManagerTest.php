@@ -126,6 +126,16 @@ test('the default currency can have any rate', function () {
     )->toBe('0.54 €');
 });
 
+test('change currency rate on convertion', function () {
+    currencies()->add([new CZK(rate: 1), new EUR(rate: 0.5)]);
+
+    currencies()->setDefault(CZK::class);
+
+    expect(
+        money(200, 'CZK')->convertTo(EUR::class)->formatted()
+    )->toBe('1.00 €');
+});
+
 test('the getCode method accepts any currency format', function () {
     expect(currencies()->getCode(USD::class))->toBe('USD');
     expect(currencies()->getCode(new USD))->toBe('USD');

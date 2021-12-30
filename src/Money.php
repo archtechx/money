@@ -233,14 +233,14 @@ final class Money implements JsonSerializable, Arrayable, Wireable
     }
 
     /** Convert the money to a different currency. */
-    public function convertTo(Currency|string $currency): self
+    public function convertTo(Currency|string $currency, float $rate = null): self
     {
         // We're converting from the current currency to the default currency, and then to the intended currency
         $newCurrency = currency($currency);
         $mathDecimalDifference = $newCurrency->mathDecimals() - currencies()->getDefault()->mathDecimals();
 
         return new static(
-            (int) round($this->valueInDefaultCurrency() * $newCurrency->rate() * 10 ** $mathDecimalDifference, 0),
+            (int) round($this->valueInDefaultCurrency() * ($rate ?: $newCurrency->rate()) * 10 ** $mathDecimalDifference, 0),
             $currency
         );
     }
