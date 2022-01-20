@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        laravel: [9, 8]
+        laravel: [8, 9]
 
     steps:
     - uses: actions/checkout@v2
