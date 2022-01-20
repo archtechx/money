@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        laravel: [9, 8]
+        laravel: [8, 9]
 
     steps:
     - uses: actions/checkout@v2
