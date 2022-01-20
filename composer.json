@@ -25,11 +25,11 @@
     },
     "require": {
         "php": "^8.0",
-        "illuminate/support": "^8.24",
+        "illuminate/support": "^8.0|^9.0",
         "archtechx/helpers": "*"
     },
     "require-dev": {
-        "orchestra/testbench": "^6.9",
+        "orchestra/testbench": "^6.9|^7.0",
         "pestphp/pest": "^1.10",
         "phpstan/phpstan": "^0.12.92",
         "pestphp/pest-plugin-laravel": "^1.1",
@@ -41,5 +41,7 @@
                 "ArchTech\\Money\\MoneyServiceProvider"
             ]
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

@@ -13,15 +13,19 @@ on:
 
 jobs:
   pest:
-    name: Tests (Pest)
+    name: Tests (Pest) L${{ matrix.laravel }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        laravel: [9, 8]
 
     steps:
     - uses: actions/checkout@v2
     - name: Start docker containers
       run: docker-compose up -d
     - name: Install composer dependencies
-      run: composer install
+      run: require "illuminate/support:^${{ matrix.laravel }}.0"
     - name: Run tests
       run: vendor/bin/pest
 
