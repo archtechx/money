@@ -16,7 +16,6 @@ jobs:
     name: Tests (Pest) L${{ matrix.laravel }}
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: true
       matrix:
         laravel: [9, 8]
 
