@@ -1,6 +1,5 @@
 <?php
 
-use ArchTech\Money\CurrencyManager;
 use ArchTech\Money\Tests\Currencies\CZK;
 
 test('money is rounded to its math decimals after each operation', function () {
