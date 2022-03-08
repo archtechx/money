@@ -49,12 +49,12 @@ $money->value(); // 4500
 $money = money(1500); // $15.00; default currency
 $money = money(1500, 'EUR'); // 15.00 €
 $money = money(2000, new USD); // $20.00
-$money = money(3000, CZK::class); // 20 Kč
+$money = money(3000, CZK::class); // 30 Kč
 
 // Using decimals
 $money = Money::fromDecimal(15.00, 'EUR'); // 15.00 €
 $money = Money::fromDecimal(20.00, new USD); // $20.00
-$money = Money::fromDecimal(30.00, CZK::class); // 20 Kč
+$money = Money::fromDecimal(30.00, CZK::class); // 30 Kč
 ```
 
 ### Arithmetics
@@ -112,16 +112,16 @@ money(100, USD::class)->equals(money(200, CZK::class));
 // Assuming CZK is 25:1 USD
 
 // ✅ true
-money(100, USD::class)->equals(money(100, USD::class));
+money(100, USD::class)->is(money(100, USD::class));
 
 // ❌ false: different monetary value
-money(100, USD::class)->equals(money(200, USD::class));
+money(100, USD::class)->is(money(200, USD::class));
 
 // ❌ false: different currency
-money(100, USD::class)->equals(money(2500, CZK::class));
+money(100, USD::class)->is(money(2500, CZK::class));
 
 // ❌ false: different currency AND monetary value
-money(100, USD::class)->equals(money(200, CZK::class));
+money(100, USD::class)->is(money(200, CZK::class));
 ```
 
 ### Adding fees
@@ -220,6 +220,8 @@ $money->decimals(); // 2.20
 To work with the registered currencies, use the bound `CurrencyManager` instance, accessible using the `currencies()` helper.
 
 ### Creating a currency
+
+This package provides only USD currency by default.
 
 You can create a currency using one of the multiple supported syntaxes.
 ```php
@@ -412,7 +414,7 @@ For the Czech Crown (CZK), the display decimals will be `0`, but the math decima
 
 For the inverse of what was just explained above, you can use the `rawFormatted()` method. This returns the formatted value, **but uses the math decimals for the display decimals**. Meaning, the value in the example above will be displayed including cents:
 ```php
-money(123456, new CZK)->formatted(); // 1 235,56 Kč
+money(123456, new CZK)->rawFormatted(); // 1 235,56 Kč
 ```
 
 This is mostly useful for currencies like the Czech Crown which generally don't use cents, but **can** use them in specific cases.

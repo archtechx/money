@@ -1,6 +1,5 @@
 <?php
 
-use ArchTech\Money\CurrencyManager;
 use ArchTech\Money\Currencies\USD;
 use ArchTech\Money\Currency;
 use ArchTech\Money\Money;
