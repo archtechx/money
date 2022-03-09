@@ -143,7 +143,7 @@ $money->decimals(); // 100.0
 
 ### Formatting money
 
-You can format money using the `->formatted()` method:
+You can format money using the `->formatted()` method. It takes [display decimals](#display-decimals) into consideration.
 
 ```php
 $money = Money::fromDecimal(40.25, USD::class);
@@ -165,6 +165,22 @@ $money = Money::fromDecimal(40.25, USD::class);
 // $ 40.25 USD
 $money->formatted(['decimalSeparator' => ',', 'prefix' => '$ ', 'suffix' => ' USD']);
 ```
+
+There is also a `->rawFormatted()` if you wish to use [math decimals](#math-decimals) instead of [display decimals](#display-decimals).
+```php
+$money = Money::new(123456, CZK::class);
+$money->rawFormatted(); // 1 235,56 Kč
+```
+
+And converting the formatted value back to the Money instance is also possible:
+```php
+$money = money(1000);
+$formatted = $money->formatted(); // $10.00
+$fromFormatted = Money::fromFormatted($formatted);
+$fromFormatted->is($money); // true
+```
+
+Note: `fromFormatted()` misses the cents if the [math decimals](#math-decimals) are greater than [display decimals](#display-decimals).
 
 ### Rounding money
 
@@ -414,7 +430,7 @@ For the Czech Crown (CZK), the display decimals will be `0`, but the math decima
 
 For the inverse of what was just explained above, you can use the `rawFormatted()` method. This returns the formatted value, **but uses the math decimals for the display decimals**. Meaning, the value in the example above will be displayed including cents:
 ```php
-money(123456, new CZK)->rawFormatted(); // 1 235,56 Kč
+money(123456, new CZK)->rawFormatted(); // 1 234,56 Kč
 ```
 
 This is mostly useful for currencies like the Czech Crown which generally don't use cents, but **can** use them in specific cases.

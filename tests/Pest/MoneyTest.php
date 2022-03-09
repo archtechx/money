@@ -147,6 +147,18 @@ test('money can be formatted without rounding', function () {
     )->toBe('10,34 Kč');
 });
 
+test('money can be created from a formatted string', function () {
+    $money = Money::fromFormatted('$10.40');
+    expect($money->value())->toBe(1040);
+});
+
+test('money can be created from a raw formatted string', function () {
+    currencies()->add([CZK::class]);
+
+    $money = Money::fromFormatted('1 234,56 Kč', CZK::class);
+    expect($money->value())->toBe(123456);
+});
+
 test('converting money to a string returns the formatted string', function () {
     expect(
         (string) Money::fromDecimal(10.00, USD::class)
