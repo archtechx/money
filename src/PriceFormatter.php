@@ -35,7 +35,7 @@ class PriceFormatter
 
         $removeNonDigits = preg_replace('/[^\d' . preg_quote($currency->decimalSeparator()) . ']/', '', $formatted);
 
-        if (!is_string($removeNonDigits)) {
+        if (! is_string($removeNonDigits)) {
             throw new \Exception('The formatted string could not be resolved to a valid number.');
         }
 
