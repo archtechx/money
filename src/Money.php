@@ -36,7 +36,7 @@ final class Money implements JsonSerializable, Arrayable, Wireable
     public static function fromDecimal(float $decimal, Currency|string $currency = null): self
     {
         return new static(
-            (int) round($decimal * 10 ** currency($currency)->mathDecimals()),
+            (int) round($decimal * pow(10, currency($currency)->mathDecimals())),
             currency($currency)
         );
     }
@@ -154,7 +154,7 @@ final class Money implements JsonSerializable, Arrayable, Wireable
     /** Get the decimal representation of the value. */
     public function decimal(): float
     {
-        return $this->value / 10 ** $this->currency->mathDecimals();
+        return $this->value / pow(10, $this->currency->mathDecimals());
     }
 
     /** Format the value. */
@@ -228,7 +228,7 @@ final class Money implements JsonSerializable, Arrayable, Wireable
 
         return $this
             ->divideBy($this->currency->rate())
-            ->divideBy(10 ** $mathDecimalDifference)
+            ->divideBy(pow(10, $mathDecimalDifference))
             ->value();
     }
 
@@ -240,7 +240,7 @@ final class Money implements JsonSerializable, Arrayable, Wireable
         $mathDecimalDifference = $newCurrency->mathDecimals() - currencies()->getDefault()->mathDecimals();
 
         return new static(
-            (int) round($this->valueInDefaultCurrency() * $newCurrency->rate() * 10 ** $mathDecimalDifference, 0),
+            (int) round($this->valueInDefaultCurrency() * $newCurrency->rate() * pow(10, $mathDecimalDifference), 0),
             $currency
         );
     }
