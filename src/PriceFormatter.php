@@ -33,7 +33,7 @@ class PriceFormatter
         $formatted = ltrim($formatted, $currency->prefix());
         $formatted = rtrim($formatted, $currency->suffix());
 
-        $removeNonDigits = preg_replace('/[^\d'.preg_quote($currency->decimalSeparator()).']/', '', $formatted);
+        $removeNonDigits = preg_replace('/[^\d' . preg_quote($currency->decimalSeparator()) . ']/', '', $formatted);
 
         return (float) str_replace($currency->decimalSeparator(), '.', $removeNonDigits);
     }
