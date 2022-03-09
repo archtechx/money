@@ -21,8 +21,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Start docker containers
-      run: docker-compose up -d
     - name: Install composer dependencies
       run: composer require "illuminate/support:^${{ matrix.laravel }}.0"
     - name: Run tests
