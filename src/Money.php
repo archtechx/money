@@ -178,7 +178,7 @@ final class Money implements JsonSerializable, Arrayable, Wireable
             ? currency($currency)
             : PriceFormatter::extractCurrency($formatted);
 
-        $decimal = PriceFormatter::resolve($formatted, currency($currency), variadic_array($overrides));
+        $decimal = PriceFormatter::resolve($formatted, $currency, variadic_array($overrides));
 
         return static::fromDecimal($decimal, currency($currency));
     }
