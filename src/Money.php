@@ -174,6 +174,10 @@ final class Money implements JsonSerializable, Arrayable, Wireable
     /** Create a Money instance from a formatted string. */
     public static function fromFormatted(string $formatted, Currency|string $currency = null, mixed ...$overrides): self
     {
+        $currency = isset($currency)
+            ? currency($currency)
+            : PriceFormatter::extractCurrency($formatted);
+
         $decimal = PriceFormatter::resolve($formatted, currency($currency), variadic_array($overrides));
 
         return static::fromDecimal($decimal, currency($currency));

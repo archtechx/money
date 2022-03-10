@@ -159,6 +159,24 @@ test('money can be created from a raw formatted string', function () {
     expect($money->value())->toBe(123456);
 });
 
+test('an exception is thrown if none of the currencies match the prefix and suffix', function () {
+    $money = money(1000);
+    $formatted = $money->formatted();
+
+    currencies()->remove(USD::class);
+
+    pest()->expectException(\Exception::class);
+    Money::fromFormatted($formatted);
+});
+
+test('an exception is thrown if multiple currencies are using the same prefix and suffix', function () {
+    currencies()->add(['code' => 'USD2', 'name' => 'USD2', 'prefix' => '$']);
+    $money = money(1000);
+
+    pest()->expectException(\Exception::class);
+    Money::fromFormatted($money->formatted());
+});
+
 test('converting money to a string returns the formatted string', function () {
     expect(
         (string) Money::fromDecimal(10.00, USD::class)

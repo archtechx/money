@@ -172,7 +172,7 @@ $money = Money::new(123456, CZK::class);
 $money->rawFormatted(); // 1 235,56 Kč
 ```
 
-And converting the formatted value back to the Money instance is also possible:
+And converting the formatted value back to the Money instance is also possible. The package tries to extract the currency from the provided string.
 ```php
 $money = money(1000);
 $formatted = $money->formatted(); // $10.00
@@ -180,7 +180,18 @@ $fromFormatted = Money::fromFormatted($formatted);
 $fromFormatted->is($money); // true
 ```
 
-Note: `fromFormatted()` misses the cents if the [math decimals](#math-decimals) are greater than [display decimals](#display-decimals).
+Optional overrides for the [currency specification](#currency-logic) are accepted too.
+```php
+$money = money(1000);
+$formatted = $money->formatted(); // $10.00
+$fromFormatted = Money::fromFormatted($formatted, USD::class, ['decimalSeparator' => ',', 'prefix' => '$ ', 'suffix' => ' USD']);
+$fromFormatted->is($money); // true
+```
+
+Notes:
+1) If currency is not specified and none of the currencies match the prefix and suffix, an exception will be thrown.
+2) If currency is not specified and multiple currencies use the same prefix and suffix, an exception will be thrown.
+3) `fromFormatted()` misses the cents if the [math decimals](#math-decimals) are greater than [display decimals](#display-decimals).
 
 ### Rounding money
 
