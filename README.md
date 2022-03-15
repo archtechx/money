@@ -166,13 +166,13 @@ $money = Money::fromDecimal(40.25, USD::class);
 $money->formatted(['decimalSeparator' => ',', 'prefix' => '$ ', 'suffix' => ' USD']);
 ```
 
-There is also a `->rawFormatted()` if you wish to use [math decimals](#math-decimals) instead of [display decimals](#display-decimals).
+There's also `->rawFormatted()` if you wish to use [math decimals](#math-decimals) instead of [display decimals](#display-decimals).
 ```php
 $money = Money::new(123456, CZK::class);
-$money->rawFormatted(); // 1 235,56 Kč
+$money->rawFormatted(); // 1 234,56 Kč
 ```
 
-And converting the formatted value back to the Money instance is also possible. The package tries to extract the currency from the provided string.
+Converting the formatted value back to the `Money` instance is also possible. The package tries to extract the currency from the provided string:
 ```php
 $money = money(1000);
 $formatted = $money->formatted(); // $10.00
