@@ -1,6 +1,7 @@
 <?php
 
 use ArchTech\Money\Currencies\USD;
+use ArchTech\Money\Exceptions\CannotExtractCurrencyException;
 use ArchTech\Money\Money;
 use ArchTech\Money\Tests\Currencies\CZK;
 use ArchTech\Money\Tests\Currencies\EUR;
@@ -165,7 +166,7 @@ test('an exception is thrown if none of the currencies match the prefix and suff
 
     currencies()->remove(USD::class);
 
-    pest()->expectException(\Exception::class);
+    pest()->expectException(CannotExtractCurrencyException::class);
     Money::fromFormatted($formatted);
 });
 
@@ -173,7 +174,7 @@ test('an exception is thrown if multiple currencies are using the same prefix an
     currencies()->add(['code' => 'USD2', 'name' => 'USD2', 'prefix' => '$']);
     $money = money(1000);
 
-    pest()->expectException(\Exception::class);
+    pest()->expectException(CannotExtractCurrencyException::class);
     Money::fromFormatted($money->formatted());
 });
 
