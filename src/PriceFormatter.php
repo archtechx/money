@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ArchTech\Money;
 
 use ArchTech\Money\Exceptions\CannotExtractCurrencyException;
+use Exception;
 
 class PriceFormatter
 {
@@ -38,7 +39,7 @@ class PriceFormatter
         $removeNonDigits = preg_replace('/[^\d' . preg_quote($currency->decimalSeparator()) . ']/', '', $formatted);
 
         if (! is_string($removeNonDigits)) {
-            throw new \Exception('The formatted string could not be resolved to a valid number.');
+            throw new Exception('The formatted string could not be resolved to a valid number.');
         }
 
         return (float) str_replace($currency->decimalSeparator(), '.', $removeNonDigits);
