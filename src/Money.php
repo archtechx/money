@@ -36,7 +36,7 @@ final class Money implements JsonSerializable, Arrayable, Wireable
     public static function fromDecimal(float $decimal, Currency|string $currency = null): self
     {
         return new static(
-            (int) round($decimal * 10 ** currency($currency)->mathDecimals()),
+            (int) round($decimal * pow(10, currency($currency)->mathDecimals())),
             currency($currency)
         );
     }
@@ -154,7 +154,7 @@ final class Money implements JsonSerializable, Arrayable, Wireable
     /** Get the decimal representation of the value. */
     public function decimal(): float
     {
-        return $this->value / 10 ** $this->currency->mathDecimals();
+        return $this->value / pow(10, $this->currency->mathDecimals());
     }
 
     /** Format the value. */
@@ -169,6 +169,24 @@ final class Money implements JsonSerializable, Arrayable, Wireable
         return $this->formatted(array_merge(variadic_array($overrides), [
             'displayDecimals' => $this->currency->mathDecimals(),
         ]));
+    }
+
+    /**
+     * Create a Money instance from a formatted string.
+     *
+     * @param  string  $formatted The string formatted using the `formatted()` or `rawFormatted()` method.
+     * @param  Currency|string|null  $currency The currency to use when passing the overrides. If not provided, the currency of the formatted string is used.
+     * @param  array  ...$overrides The overrides used when formatting the money instance.
+     */
+    public static function fromFormatted(string $formatted, Currency|string $currency = null, mixed ...$overrides): self
+    {
+        $currency = isset($currency)
+            ? currency($currency)
+            : PriceFormatter::extractCurrency($formatted);
+
+        $decimal = PriceFormatter::resolve($formatted, $currency, variadic_array($overrides));
+
+        return static::fromDecimal($decimal, currency($currency));
     }
 
     /** Get the string representation of the Money instance. */
@@ -228,7 +246,7 @@ final class Money implements JsonSerializable, Arrayable, Wireable
 
         return $this
             ->divideBy($this->currency->rate())
-            ->divideBy(10 ** $mathDecimalDifference)
+            ->divideBy(pow(10, $mathDecimalDifference))
             ->value();
     }
 
@@ -240,7 +258,7 @@ final class Money implements JsonSerializable, Arrayable, Wireable
         $mathDecimalDifference = $newCurrency->mathDecimals() - currencies()->getDefault()->mathDecimals();
 
         return new static(
-            (int) round($this->valueInDefaultCurrency() * $newCurrency->rate() * 10 ** $mathDecimalDifference, 0),
+            (int) round($this->valueInDefaultCurrency() * $newCurrency->rate() * pow(10, $mathDecimalDifference), 0),
             $currency
         );
     }

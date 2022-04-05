@@ -1,6 +1,7 @@
 <?php
 
 use ArchTech\Money\Currencies\USD;
+use ArchTech\Money\Exceptions\CannotExtractCurrencyException;
 use ArchTech\Money\Money;
 use ArchTech\Money\Tests\Currencies\CZK;
 use ArchTech\Money\Tests\Currencies\EUR;
@@ -145,6 +146,36 @@ test('money can be formatted without rounding', function () {
     expect(
         Money::fromDecimal(10.34, CZK::class)->rawFormatted()
     )->toBe('10,34 Kč');
+});
+
+test('money can be created from a formatted string', function () {
+    $money = Money::fromFormatted('$10.40');
+    expect($money->value())->toBe(1040);
+});
+
+test('money can be created from a raw formatted string', function () {
+    currencies()->add([CZK::class]);
+
+    $money = Money::fromFormatted('1 234,56 Kč', CZK::class);
+    expect($money->value())->toBe(123456);
+});
+
+test('an exception is thrown if none of the currencies match the prefix and suffix', function () {
+    $money = money(1000);
+    $formatted = $money->formatted();
+
+    currencies()->remove(USD::class);
+
+    pest()->expectException(CannotExtractCurrencyException::class);
+    Money::fromFormatted($formatted);
+});
+
+test('an exception is thrown if multiple currencies are using the same prefix and suffix', function () {
+    currencies()->add(['code' => 'USD2', 'name' => 'USD2', 'prefix' => '$']);
+    $money = money(1000);
+
+    pest()->expectException(CannotExtractCurrencyException::class);
+    Money::fromFormatted($money->formatted());
 });
 
 test('converting money to a string returns the formatted string', function () {
