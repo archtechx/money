@@ -56,13 +56,13 @@ class PriceFormatter
                 && str_ends_with($formatted, $currency->suffix())
             ) {
                 if ($possibleCurrency) {
-                    throw new CannotExtractCurrencyException('Multiple currencies are using the same prefix and suffix. Please specify the currency of the formatted string.');
+                    throw new CannotExtractCurrencyException("Multiple currencies are using the same prefix and suffix as '$formatted'. Please specify the currency of the formatted string.");
                 }
 
                 $possibleCurrency = $currency;
             }
         }
 
-        return $possibleCurrency ?? throw new CannotExtractCurrencyException('None of the currencies are using the prefix and suffix that would match with the formatted string.');
+        return $possibleCurrency ?? throw new CannotExtractCurrencyException("None of the currencies are using the prefix and suffix that would match with the formatted string '$formatted'.");
     }
 }

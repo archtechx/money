@@ -171,7 +171,13 @@ final class Money implements JsonSerializable, Arrayable, Wireable
         ]));
     }
 
-    /** Create a Money instance from a formatted string. */
+    /**
+     * Create a Money instance from a formatted string.
+     *
+     * @param  string  $formatted The string formatted using the `formatted()` or `rawFormatted()` method.
+     * @param  Currency|string|null  $currency The currency to use when passing the overrides. If not provided, the currency of the formatted string is used.
+     * @param  array  ...$overrides The overrides used when formatting the money instance.
+     */
     public static function fromFormatted(string $formatted, Currency|string $currency = null, mixed ...$overrides): self
     {
         $currency = isset($currency)

@@ -180,11 +180,11 @@ $fromFormatted = Money::fromFormatted($formatted);
 $fromFormatted->is($money); // true
 ```
 
-Optional overrides for the [currency specification](#currency-logic) are accepted too.
+If you had passed overrides while [formatting the money instance](#formatting-money), the same can passed to this method.
 ```php
 $money = money(1000);
-$formatted = $money->formatted(); // $10.00
-$fromFormatted = Money::fromFormatted($formatted, USD::class, ['decimalSeparator' => ',', 'prefix' => '$ ', 'suffix' => ' USD']);
+$formatted = $money->formatted(['prefix' => '$ ', 'suffix' => ' USD']); // $ 10.00 USD
+$fromFormatted = Money::fromFormatted($formatted, USD::class, ['prefix' => '$ ', 'suffix' => ' USD']);
 $fromFormatted->is($money); // true
 ```
 
