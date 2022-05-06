@@ -28,6 +28,7 @@ test('currencies can be serialized to JSON', function () {
         'rounding' => 2,
         'decimalSeparator' => ',',
         'thousandsSeparator' => '.',
+        'deleteTrailingDecimalZeros' => false,
     ]);
 });
 
