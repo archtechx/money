@@ -138,7 +138,7 @@ class Currency implements Arrayable, JsonSerializable
         return $this->rounding;
     }
 
-    /** Get the setting for delete trailing decimal zeros. */
+    /** Get the setting for how trailing decimal zeroes should be handled. */
     public function deleteTrailingDecimalZeros(): bool
     {
         return $this->deleteTrailingDecimalZeros;
