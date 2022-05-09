@@ -116,7 +116,7 @@ class Currency implements Arrayable, JsonSerializable
 
     /** Get the currency's math decimal count. */
     public function displayDecimals(): int
-   {
+    {
         return $this->displayDecimals;
     }
 
