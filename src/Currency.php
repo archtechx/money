@@ -40,6 +40,9 @@ class Currency implements Arrayable, JsonSerializable
     /** How many decimals of the currency's values should get rounded. */
     protected int $rounding;
 
+    /** Should trailing decimal zeros be trimmed. */
+    protected bool $trimTrailingDecimalZeros;
+
     /** Create a new Currency instance. */
     public function __construct(
         string $code = null,
@@ -52,6 +55,7 @@ class Currency implements Arrayable, JsonSerializable
         int $rounding = null,
         string $decimalSeparator = null,
         string $thousandsSeparator = null,
+        bool $trimTrailingDecimalZeros = null,
     ) {
         $this->code = $code ?? $this->code ?? '';
         $this->name = $name ?? $this->name ?? '';
@@ -63,6 +67,7 @@ class Currency implements Arrayable, JsonSerializable
         $this->decimalSeparator = $decimalSeparator ?? $this->decimalSeparator ?? '.';
         $this->thousandsSeparator = $thousandsSeparator ?? $this->thousandsSeparator ?? ',';
         $this->rounding = $rounding ?? $this->rounding ?? $this->mathDecimals;
+        $this->trimTrailingDecimalZeros = $trimTrailingDecimalZeros ?? $this->trimTrailingDecimalZeros ?? false;
 
         $this->check();
     }
@@ -133,6 +138,12 @@ class Currency implements Arrayable, JsonSerializable
         return $this->rounding;
     }
 
+    /** Get the currency's setting for trimming trailing decimal zeros. */
+    public function trimTrailingDecimalZeros(): bool
+    {
+        return $this->trimTrailingDecimalZeros;
+    }
+
     /** Convert the currency to a string (returns the code). */
     public function __toString()
     {
@@ -153,6 +164,7 @@ class Currency implements Arrayable, JsonSerializable
             'rounding' => $this->rounding,
             'decimalSeparator' => $this->decimalSeparator,
             'thousandsSeparator' => $this->thousandsSeparator,
+            'trimTrailingDecimalZeros' => $this->trimTrailingDecimalZeros,
         ];
     }
 
