@@ -41,7 +41,7 @@ class Currency implements Arrayable, JsonSerializable
     protected int $rounding;
 
     /** Setting to decide if trailing decimal zeros should be removed for when calling formatted(). */
-    protected bool $deleteTrailingDecimalZeros;
+    protected bool $trimTrailingDecimalZeros;
 
     /** Create a new Currency instance. */
     public function __construct(
@@ -55,7 +55,7 @@ class Currency implements Arrayable, JsonSerializable
         int $rounding = null,
         string $decimalSeparator = null,
         string $thousandsSeparator = null,
-        bool $deleteTrailingDecimalZeros = null,
+        bool $trimTrailingDecimalZeros = null,
     ) {
         $this->code = $code ?? $this->code ?? '';
         $this->name = $name ?? $this->name ?? '';
@@ -67,7 +67,7 @@ class Currency implements Arrayable, JsonSerializable
         $this->decimalSeparator = $decimalSeparator ?? $this->decimalSeparator ?? '.';
         $this->thousandsSeparator = $thousandsSeparator ?? $this->thousandsSeparator ?? ',';
         $this->rounding = $rounding ?? $this->rounding ?? $this->mathDecimals;
-        $this->deleteTrailingDecimalZeros = $deleteTrailingDecimalZeros ?? $this->deleteTrailingDecimalZeros ?? false;
+        $this->trimTrailingDecimalZeros = $trimTrailingDecimalZeros ?? $this->trimTrailingDecimalZeros ?? false;
 
         $this->check();
     }
@@ -139,9 +139,9 @@ class Currency implements Arrayable, JsonSerializable
     }
 
     /** Get the setting for how trailing decimal zeroes should be handled. */
-    public function deleteTrailingDecimalZeros(): bool
+    public function trimTrailingDecimalZeros(): bool
     {
-        return $this->deleteTrailingDecimalZeros;
+        return $this->trimTrailingDecimalZeros;
     }
 
     /** Convert the currency to a string (returns the code). */
@@ -164,7 +164,7 @@ class Currency implements Arrayable, JsonSerializable
             'rounding' => $this->rounding,
             'decimalSeparator' => $this->decimalSeparator,
             'thousandsSeparator' => $this->thousandsSeparator,
-            'deleteTrailingDecimalZeros' => $this->deleteTrailingDecimalZeros,
+            'trimTrailingDecimalZeros' => $this->trimTrailingDecimalZeros,
         ];
     }
 

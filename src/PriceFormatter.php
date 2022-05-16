@@ -23,7 +23,7 @@ class PriceFormatter
             $currency->thousandsSeparator(),
         );
 
-        if ($currency->deleteTrailingDecimalZeros()) {
+        if ($currency->trimTrailingDecimalZeros()) {
             // Remove trailing zeros from price
             $decimal = rtrim($decimal, '0');
             // If there is no more decimal values, remove the trailing decimal separator as well

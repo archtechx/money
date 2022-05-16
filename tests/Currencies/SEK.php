@@ -13,5 +13,5 @@ class SEK extends Currency
     protected int $displayDecimals = 2;
     protected int $rounding = 0;
     protected string $suffix = ' kr';
-    protected bool $deleteTrailingDecimalZeros = true;
+    protected bool $trimTrailingDecimalZeros = true;
 }

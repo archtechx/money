@@ -15,5 +15,5 @@ class CZK extends Currency
     protected string $thousandsSeparator = '.';
     protected int $rounding = 2;
     protected string $suffix = ' Kč';
-    protected bool $deleteTrailingDecimalZeros = false;
+    protected bool $trimTrailingDecimalZeros = false;
 }
