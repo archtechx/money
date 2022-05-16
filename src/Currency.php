@@ -40,7 +40,7 @@ class Currency implements Arrayable, JsonSerializable
     /** How many decimals of the currency's values should get rounded. */
     protected int $rounding;
 
-    /** Setting to decide if trailing decimal zeros should be removed for when calling formatted(). */
+    /** The setting used for determining if trailing decimal zeros should be trimmed. */
     protected bool $trimTrailingDecimalZeros;
 
     /** Create a new Currency instance. */
