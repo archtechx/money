@@ -24,9 +24,10 @@ class PriceFormatter
         );
 
         if ($currency->trimTrailingDecimalZeros()) {
-            // Remove trailing zeros from price
+            // Remove trailing zeros from the formatted string
             $decimal = rtrim($decimal, '0');
-            // If there is no more decimal values, remove the trailing decimal separator as well
+            
+            // Once there are no more decimal values, remove the decimal separator as well
             $decimal = rtrim($decimal, $currency->decimalSeparator());
         }
 
