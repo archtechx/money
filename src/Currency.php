@@ -40,7 +40,7 @@ class Currency implements Arrayable, JsonSerializable
     /** How many decimals of the currency's values should get rounded. */
     protected int $rounding;
 
-    /** The setting used for determining if trailing decimal zeros should be trimmed. */
+    /** Should trailing decimal zeros be trimmed. */
     protected bool $trimTrailingDecimalZeros;
 
     /** Create a new Currency instance. */
@@ -138,7 +138,7 @@ class Currency implements Arrayable, JsonSerializable
         return $this->rounding;
     }
 
-    /** Get the setting for how trailing decimal zeroes should be handled. */
+    /** Get the currency's setting for trimming trailing decimal zeros. */
     public function trimTrailingDecimalZeros(): bool
     {
         return $this->trimTrailingDecimalZeros;
