@@ -13,5 +13,4 @@ class EUR extends Currency
     protected int $displayDecimals = 2;
     protected int $rounding = 0;
     protected string $suffix = ' €';
-    protected bool $trimTrailingDecimalZeros = false;
 }

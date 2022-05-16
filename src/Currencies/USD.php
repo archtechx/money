@@ -15,5 +15,4 @@ class USD extends Currency
     protected int $displayDecimals = 2;
     protected int $rounding = 2;
     protected string $prefix = '$';
-    protected bool $trimTrailingDecimalZeros = false;
 }
