@@ -263,11 +263,11 @@ $currency = new Currency(
 
 // array
 $currency = [
-    code: 'FOO',
-    name: 'Foo currency',
-    rate: 1.8,
-    prefix: '# ',
-    suffix: ' FOO',
+    'code' => 'FOO',
+    'name' => 'Foo currency',
+    'rate' => 1.8,
+    'prefix' => '# ',
+    'suffix' => ' FOO',
 ];
 
 // class
