@@ -138,7 +138,7 @@ $money->value(); // 1200
 ```php
 $money = Money::fromDecimal(100.0, new USD);
 $money->value(); // 10000
-$money->decimals(); // 100.0
+$money->decimal(); // 100.0
 ```
 
 ### Formatting money
@@ -216,12 +216,12 @@ This rounding (to full crowns) is standard and legal per the accounting legislat
 For that use case, our package lets you get the rounding difference using a simple method call:
 ```php
 $money = Money::fromDecimal(9.90, CZK::class);
-$money->decimals(); // 9.90
+$money->decimal(); // 9.90
 $money->formatted(); // 10 Kč
 $money->rounding(); // +0.10 Kč = 10
 
 $money = Money::fromDecimal(3.30, CZK::class);
-$money->decimals(); // 3.30
+$money->decimal(); // 3.30
 $money->formatted(); // 3 Kč
 $money->rounding(); // -0.30 Kč = -30
 ```
@@ -231,15 +231,15 @@ $money->rounding(); // -0.30 Kč = -30
 ```php
 // Using the currency rounding
 $money = Money::fromDecimal(9.90, CZK::class);
-$money->decimals(); // 9.90
+$money->decimal(); // 9.90
 $money = $money->rounded(); // currency rounding
-$money->decimals(); // 10.0
+$money->decimal(); // 10.0
 
 // Using custom rounding
 $money = Money::fromDecimal(2.22, USD::class);
-$money->decimals(); // 2.22
+$money->decimal(); // 2.22
 $money = $money->rounded(1); // custom rounding: 1 decimal
-$money->decimals(); // 2.20
+$money->decimal(); // 2.20
 ```
 
 ## Currencies
