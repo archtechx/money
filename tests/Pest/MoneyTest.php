@@ -11,7 +11,7 @@ test('Money value is immutable', function () {
 
     try {
         $money->value = 200;
-    } catch (\Throwable $th) {
+    } catch (Error $th) {
         expect($th->getMessage())->toStartWith('Cannot access protected property');
     }
 });
@@ -21,7 +21,7 @@ test('Money currency is immutable', function () {
 
     try {
         $money->currency = 'EUR';
-    } catch (\Throwable $th) {
+    } catch (Error $th) {
         expect($th->getMessage())->toStartWith('Cannot access protected property');
     }
 });
