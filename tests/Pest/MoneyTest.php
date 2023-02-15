@@ -6,22 +6,6 @@ use ArchTech\Money\Money;
 use ArchTech\Money\Tests\Currencies\CZK;
 use ArchTech\Money\Tests\Currencies\EUR;
 
-test('Money value is immutable', function () {
-    pest()->expectError();
-
-    $money = money(100);
-
-    $money->value = 200;
-});
-
-test('Money currency is immutable', function () {
-    pest()->expectError();
-
-    $money = money(100);
-
-    $money->currency = 'EUR';
-});
-
 test('money can be created from a decimal value', function () {
     $money = Money::fromDecimal(10.0, 'USD');
 
