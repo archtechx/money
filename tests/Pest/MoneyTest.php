@@ -6,6 +6,26 @@ use ArchTech\Money\Money;
 use ArchTech\Money\Tests\Currencies\CZK;
 use ArchTech\Money\Tests\Currencies\EUR;
 
+test('Money value is immutable', function () {
+    $money = money(100);
+
+    try {
+        $money->value = 200;
+    } catch (\Throwable $th) {
+        expect($th->getMessage())->toStartWith('Cannot access protected property');
+    }
+});
+
+test('Money currency is immutable', function () {
+    $money = money(100);
+
+    try {
+        $money->currency = 'EUR';
+    } catch (\Throwable $th) {
+        expect($th->getMessage())->toStartWith('Cannot access protected property');
+    }
+});
+
 test('money can be created from a decimal value', function () {
     $money = Money::fromDecimal(10.0, 'USD');
 
