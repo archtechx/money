@@ -128,7 +128,10 @@ trait RegistersCurrencies
         }
 
         if (class_exists($currency) && (new ReflectionClass($currency))->isSubclassOf(Currency::class)) {
-            return (new $currency)->code();
+            /** @var Currency $currency * */
+            $currency = new $currency;
+
+            return $currency->code();
         }
 
         throw new InvalidCurrencyException(

@@ -16,10 +16,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        laravel: [8, 9]
+        laravel: [9, 10]
 
     steps:
     - uses: actions/checkout@v2
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
     - name: Install composer dependencies
       run: composer require "illuminate/support:^${{ matrix.laravel }}.0"
     - name: Run tests

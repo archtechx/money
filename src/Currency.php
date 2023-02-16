@@ -8,6 +8,7 @@ use ArchTech\Money\Exceptions\InvalidCurrencyException;
 use Illuminate\Contracts\Support\Arrayable;
 use JsonSerializable;
 
+/** @implements Arrayable<string, string|int|float> */
 class Currency implements Arrayable, JsonSerializable
 {
     /** Code of the currency (e.g. 'CZK'). */

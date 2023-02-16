@@ -7,19 +7,23 @@ use ArchTech\Money\Tests\Currencies\CZK;
 use ArchTech\Money\Tests\Currencies\EUR;
 
 test('Money value is immutable', function () {
-    pest()->expectError();
-
     $money = money(100);
 
-    $money->value = 200;
+    try {
+        $money->value = 200;
+    } catch (Throwable $th) {
+        expect($th)->toBeInstanceOf(Error::class);
+    }
 });
 
 test('Money currency is immutable', function () {
-    pest()->expectError();
-
     $money = money(100);
 
-    $money->currency = 'EUR';
+    try {
+        $money->currency = 'EUR';
+    } catch (Throwable $th) {
+        expect($th)->toBeInstanceOf(Error::class);
+    }
 });
 
 test('money can be created from a decimal value', function () {

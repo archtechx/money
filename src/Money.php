@@ -8,6 +8,7 @@ use Illuminate\Contracts\Support\Arrayable;
 use JsonSerializable;
 use Livewire\Wireable;
 
+/** @implements Arrayable<string, string|int> */
 final class Money implements JsonSerializable, Arrayable, Wireable
 {
     protected int $value;

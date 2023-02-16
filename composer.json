@@ -24,16 +24,16 @@
         }
     },
     "require": {
-        "php": "^8.0",
-        "illuminate/support": "^8.0|^9.0",
-        "archtechx/helpers": "*"
+        "php": "^8.1",
+        "illuminate/support": "^9.0|^10.0",
+        "archtechx/helpers": "^0.3.1"
     },
     "require-dev": {
-        "orchestra/testbench": "^6.9|^7.0",
-        "pestphp/pest": "^1.10",
-        "phpstan/phpstan": "^0.12.92",
-        "pestphp/pest-plugin-laravel": "^1.1",
-        "nunomaduro/larastan": "^0.7.10"
+        "orchestra/testbench": "^7.19|^8.0",
+        "pestphp/pest": "^1.10|^2.0",
+        "phpstan/phpstan": "^1.9.8",
+        "pestphp/pest-plugin-laravel": "^1.1|^2.0",
+        "nunomaduro/larastan": "^2.4"
     },
     "extra": {
         "laravel": {
