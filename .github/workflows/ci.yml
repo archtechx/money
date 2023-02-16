@@ -23,17 +23,17 @@ jobs:
           php: 8.1
 
     steps:
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '${{ matrix.php }}'
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '${{ matrix.php }}'
 
-      - name: Install composer dependencies
-        uses: actions/checkout@v2
-        run: composer require "illuminate/support:^${{ matrix.laravel }}.0"
+    - name: Install composer dependencies
+      uses: actions/checkout@v2
+      run: composer require "illuminate/support:^${{ matrix.laravel }}.0"
 
-      - name: Run tests
-        run: vendor/bin/pest
+    - name: Run tests
+      run: vendor/bin/pest
 
   phpstan:
     name: Static analysis (PHPStan)
