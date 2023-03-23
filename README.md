@@ -452,7 +452,7 @@ This is mostly useful for currencies like the Czech Crown which generally don't 
 
 The current currency refers to the currently used currency.
 
-By default, the pacakge doesn't use it anywhere. All calls such as `money()` will use the provided currency, or the default currency.
+By default, the package doesn't use it anywhere. All calls such as `money()` will use the provided currency, or the default currency.
 
 The current currency is something you can convert money to in the final step of calculations, right before displaying it to the user in the browser.
 
