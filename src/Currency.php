@@ -60,7 +60,7 @@ class Currency implements Arrayable, JsonSerializable
     ) {
         $this->code = $code ?? $this->code ?? '';
         $this->name = $name ?? $this->name ?? '';
-        $this->rate = $rate ?? $this->rate ?? 1;
+        $this->rate = $rate ?? $this->rate ?? 1.0;
         $this->prefix = $prefix ?? $this->prefix ?? '';
         $this->suffix = $suffix ?? $this->suffix ?? '';
         $this->mathDecimals = $mathDecimals ?? $this->mathDecimals ?? 2;
