@@ -22,5 +22,4 @@ parameters:
             message: '#Unsafe usage of new static#'
             paths:
                 - src/Currency.php
-
-    checkMissingIterableValueType: false
+        - identifier: missingType.iterableValue

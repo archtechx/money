@@ -8,7 +8,7 @@ use ArchTech\Money\Money;
 
 if (! function_exists('money')) {
     /** Create a Money instance. */
-    function money(int $amount, Currency|string $currency = null): Money
+    function money(int $amount, Currency|string|null $currency = null): Money
     {
         return new Money($amount, $currency ?? currencies()->getDefault());
     }
@@ -16,7 +16,7 @@ if (! function_exists('money')) {
 
 if (! function_exists('currency')) {
     /** Fetch a currency. If no argument is provided, the current currency will be returned. */
-    function currency(Currency|string $currency = null): Currency
+    function currency(Currency|string|null $currency = null): Currency
     {
         if ($currency) {
             return $currency instanceof Currency

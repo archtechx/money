@@ -15,7 +15,7 @@ final class Money implements JsonSerializable, Arrayable, Wireable
     protected Currency $currency;
 
     /** Create a new Money instance. */
-    public function __construct(int $value, Currency|string $currency = null)
+    public function __construct(int $value, Currency|string|null $currency = null)
     {
         $this->value = $value;
         $this->currency = currency($currency);
@@ -34,7 +34,7 @@ final class Money implements JsonSerializable, Arrayable, Wireable
     }
 
     /** Create a Money instance from a decimal value. */
-    public static function fromDecimal(float $decimal, Currency|string $currency = null): self
+    public static function fromDecimal(float $decimal, Currency|string|null $currency = null): self
     {
         return new static(
             (int) round($decimal * pow(10, currency($currency)->mathDecimals())),
@@ -179,7 +179,7 @@ final class Money implements JsonSerializable, Arrayable, Wireable
      * @param  Currency|string|null  $currency The currency to use when passing the overrides. If not provided, the currency of the formatted string is used.
      * @param  array  ...$overrides The overrides used when formatting the money instance.
      */
-    public static function fromFormatted(string $formatted, Currency|string $currency = null, mixed ...$overrides): self
+    public static function fromFormatted(string $formatted, Currency|string|null $currency = null, mixed ...$overrides): self
     {
         $currency = isset($currency)
             ? currency($currency)
@@ -277,7 +277,7 @@ final class Money implements JsonSerializable, Arrayable, Wireable
     }
 
     /** Round the Money to a custom precision. */
-    public function rounded(int $precision = null): self
+    public function rounded(?int $precision = null): self
     {
         $precision ??= $this->currency->rounding();
 

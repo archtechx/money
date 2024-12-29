@@ -46,17 +46,17 @@ class Currency implements Arrayable, JsonSerializable
 
     /** Create a new Currency instance. */
     public function __construct(
-        string $code = null,
-        string $name = null,
-        float $rate = null,
-        string $prefix = null,
-        string $suffix = null,
-        int $mathDecimals = null,
-        int $displayDecimals = null,
-        int $rounding = null,
-        string $decimalSeparator = null,
-        string $thousandsSeparator = null,
-        bool $trimTrailingDecimalZeros = null,
+        ?string $code = null,
+        ?string $name = null,
+        ?float $rate = null,
+        ?string $prefix = null,
+        ?string $suffix = null,
+        ?int $mathDecimals = null,
+        ?int $displayDecimals = null,
+        ?int $rounding = null,
+        ?string $decimalSeparator = null,
+        ?string $thousandsSeparator = null,
+        ?bool $trimTrailingDecimalZeros = null,
     ) {
         $this->code = $code ?? $this->code ?? '';
         $this->name = $name ?? $this->name ?? '';
