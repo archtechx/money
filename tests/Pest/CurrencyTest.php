@@ -5,13 +5,13 @@ use ArchTech\Money\Exceptions\InvalidCurrencyException;
 use ArchTech\Money\Tests\Currencies\CZK;
 
 test("a currency is invalid if it doesn't have a name", function () {
-    pest()->expectException(InvalidCurrencyException::class);
+    $this->expectException(InvalidCurrencyException::class);
 
     new Currency(rate: 2.0, code: 'CZK');
 });
 
 test("a currency is invalid if it doesn't have a code", function () {
-    pest()->expectException(InvalidCurrencyException::class);
+    $this->expectException(InvalidCurrencyException::class);
 
     new Currency(rate: 2.0, name: 'Czech Crown');
 });
