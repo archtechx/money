@@ -1,10 +1,5 @@
 name: CI
 
-env:
-  COMPOSE_INTERACTIVE_NO_CLI: 1
-  PHP_CS_FIXER_IGNORE_ENV: 1
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 on:
   push:
   pull_request:
